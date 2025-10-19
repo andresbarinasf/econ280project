@@ -1,5 +1,5 @@
 ---
-contributors:
+Contributors:
   - Lars Vilhuber
   - Miklos Kóren
   - Joan Llull
