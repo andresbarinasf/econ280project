@@ -1,0 +1,33 @@
+	
+	*================================================
+	* Replication Package - ECON 280 UC San Diego 
+	*================================================
+	
+
+clear all
+set more off
+set seed 12345
+version 13.1
+
+* Globals
+* Set directory path 
+
+global path "/Users/andresbarinasf/Documents/GitHub/econ280project"
+global code "${path}/code"
+global data "${path}/data"
+
+*Replication of First Figure 
+
+use "${data}/ms_levels.dta", clear 
+
+* plot math graph
+		graph twoway (scatter mathlevel class, mcolor(gray*0.8) ///
+		msymbol(circle_hollow) msize(small) jitter(3)) ///
+		(lfitci mathlevel class, clcolor(red) lcolor(red) ///
+		clwidth(medthick)ciplot(rline) clpattern(solid) lpattern(dash) ///
+		lwidth(thin)) (function y=x, range(5.5 9.5) lcolor(navy)) ///
+		if class>5, xtitle (Grade enrolled in) ///
+		ytitle(Assessed level of student achievement) ///
+		title(Math) graphregion(fcolor(white) lcolor(white)) ///
+		legend(order(3 "Linear fit" 4 "Line of equality")) ///
+		name(base_actual_m, replace)
