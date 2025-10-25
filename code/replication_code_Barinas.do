@@ -54,3 +54,39 @@ use "${data}/ms_levels.dta", clear
 	///	export
 	
 		gr export "${results}/fig1.pdf", replace
+		
+*========================================================
+* Choose a variable of interest and plot a histogram. 
+*========================================================
+
+	use "${data}/ms_blel_jpal_long.dta", clear
+	
+	/* Histogram of Hindi test - percent correct score across treatments
+	in the endline of the intervention */
+	
+	qui sum per_hindi if round == 2 & treat == 1
+	local mean_treated = `r(mean)'
+	qui sum per_hindi if round == 2 & treat == 0
+	local mean_control = `r(mean)'
+	
+	twoway (hist per_hindi if round == 2 & treat == 1, ///
+		   discrete color(black%50) xline(`mean_treated', lwidth(medium) lcolor(black))) ///
+		   (hist per_hindi if round == 2 & treat == 0, ///
+		   discrete color(red%50) xline(`mean_control', lwidth(medium) lcolor(red))) ///
+		   , legend(order(1 "Treatment" 2 "Control") pos(6) row(1)) ///
+		   xtitle("{bf: Hindi-scores} across treatments {it:(Endline)} ") ///
+		   text(2.9 0.7 "Treatment mean: `: display %4.2f `mean_treated''{&sigma}", size(small)) ///
+		   text(2.9 0.41 "Control mean: `: display %4.2f `mean_control''{&sigma}", size(small) color(red))
+		   
+	graph export "${results}/histogram_hindi_scores.pdf", replace
+
+		   
+		   
+	
+	
+	
+		
+		
+		
+		
+		
