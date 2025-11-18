@@ -75,8 +75,8 @@ use "${data}/ms_levels.dta", clear
 		   discrete color(red%50) xline(`mean_control', lwidth(medium) lcolor(red))) ///
 		   , legend(order(1 "Treatment" 2 "Control") pos(6) row(1)) ///
 		   xtitle("{bf: Hindi-scores} across treatments {it:(Endline)} ") ///
-		   text(2.9 0.7 "Treatment mean: `: display %4.2f `mean_treated''{&sigma}", size(small)) ///
-		   text(2.9 0.41 "Control mean: `: display %4.2f `mean_control''{&sigma}", size(small) color(red))
+		   text(2.9 0.7 "Treatment mean: `: display %4.2f `mean_treated''", size(small)) ///
+		   text(2.9 0.41 "Control mean: `: display %4.2f `mean_control''", size(small) color(red))
 		   
 	graph export "${results}/histogram_hindi_scores.pdf", replace
 
